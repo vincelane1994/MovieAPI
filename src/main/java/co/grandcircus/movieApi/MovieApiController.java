@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import co.grandcircus.movieApi.entities.Movie;
 import co.grandcircus.movieApi.entities.dao.MovieRepository;
@@ -21,7 +22,10 @@ public class MovieApiController {
 	@Autowired
 	MovieRepository dao;
 
-	
+	@GetMapping("/")
+	public ModelAndView redirect() {
+		return new ModelAndView("redirect:/movies");
+	}
 	@GetMapping("/movies")
 	public List<Movie> listMovies(
 			@RequestParam(value="category", required=false)String category,
