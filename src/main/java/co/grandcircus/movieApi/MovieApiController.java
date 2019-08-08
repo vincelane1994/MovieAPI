@@ -41,12 +41,13 @@ public class MovieApiController {
 	@GetMapping("/movies/random") 
 	public Movie randomMovie(@RequestParam(value="category", required=false)String category) {
 		if(category == null || category.isEmpty()) {
-			long id = (long)(Math.random() * 100);
-			return dao.findById(id).get();
+			List<Movie> movieList = dao.findAll();
+			int id = (int)(Math.random() * 100);
+			return movieList.get(id);
 		}else {
 			List<Movie> movies = dao.findByCategory(category);
 			int catSize = movies.size();
-			int randMovie = 1 + (int)(Math.random() * catSize);
+			int randMovie = (int)(Math.random() * catSize);
 			return movies.get(randMovie);
 		}
 	}
