@@ -41,7 +41,7 @@ public class MovieApiController {
 	@GetMapping("/movies/random") 
 	public Movie randomMovie(@RequestParam(value="category", required=false)String category) {
 		if(category == null || category.isEmpty()) {
-			long id = 1 + (long)(Math.random() * 100);
+			long id = (long)(Math.random() * 100);
 			return dao.findById(id).get();
 		}else {
 			List<Movie> movies = dao.findByCategory(category);
